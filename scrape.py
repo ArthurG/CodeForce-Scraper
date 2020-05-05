@@ -18,8 +18,12 @@ for page in range(1,61):
             submit = table_data[2]
             difficulty = table_data[3]
             submissions = table_data[4]
-            df= df.append({"id":  prob_id.get_text().strip(), "name": prob_name.get_text().strip(), "difficulty": difficulty.get_text().strip(), "tags": " ".join(prob_tags.get_text().split())}, ignore_index=True)
+            tags = " ".join(prob_tags.get_text().split());
+            tg = ""
+            for idx, item in enumerate(tags.split(",")):
+                tg = tg + "tag{}={},".format(idx, item.strip())
+            df= df.append({"id":  prob_id.get_text().strip(), "name": prob_name.get_text().strip(), "difficulty": difficulty.get_text().strip(), "tags": tg}, ignore_index=True)
 
-df.to_csv("my_txt.csv")
+df.to_csv("my_txt.csv",index=False)
 
 
